@@ -1,8 +1,9 @@
 package com.hashmapPackage;
 public class HashMap<K, V> {
     private final LinkedList linkedList;
+    public INode head;
 
-   public  HashMap() {
+    public  HashMap() {
         this.linkedList = new LinkedList<K>();
     }
 
@@ -20,7 +21,16 @@ public class HashMap<K, V> {
             mapNode.setValue(value);
     }
 
-    @Override
+    public void searchDelete(K key) {
+        INode tempNode = head;
+        while (tempNode.getNext() != null) {
+            if (tempNode.getNext().getKey().equals(key)) {
+                INode temp = tempNode.getNext();
+                tempNode.setNext(temp.getNext().getNext());
+            }
+            tempNode = tempNode.getNext();
+        }
+    }
     public String toString() {
         return "HashMapNodes{" + linkedList + "}";
     }
