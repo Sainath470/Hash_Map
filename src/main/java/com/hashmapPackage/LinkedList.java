@@ -1,9 +1,8 @@
 package com.hashmapPackage;
 
 public class LinkedList<K> {
-    public INode head;
     public INode tail;
-
+    public INode head;
 
     public LinkedList() {
         this.head = null;
@@ -24,57 +23,60 @@ public class LinkedList<K> {
     }
 
 
-    public void append(INode<K> newNode) {
+    public void append(INode myNode) {
         if (tail == null) {
-            this.tail = newNode;
+            this.tail = myNode;
         }
         if (head == null) {
-            this.head = newNode;
+            this.head = myNode;
         } else {
-            this.tail.setNext(newNode);
-            this.tail = newNode;
+            this.tail.setNext(myNode);
+            this.tail = myNode;
         }
     }
 
     public void printMyNodes() {
-        System.out.println("myNodes: "+head);
+        StringBuffer currentNodes = new StringBuffer("Nodes are: ");
+        System.out.println(" Print statement");
+        INode tempNode = head;
+        while(tempNode.getNext() != null){
+            currentNodes.append(tempNode.getKey());
+            if(!tempNode.equals(tail)){
+                currentNodes.append(" ->");
+            }
+            tempNode = tempNode.getNext();
+        }
+        currentNodes.append(tempNode.getKey());
+        System.out.println(currentNodes);
     }
 
-    @Override
-    public String toString(){
-        return "HashMaoNodes{" +head + '}';
-    }
     public void insert(INode node, INode newNode) {
         INode tempNode = node.getNext();
         node.setNext(newNode);
         newNode.setNext(tempNode);
     }
 
-    public INode pop() {
+    public void pop() {
         INode tempNode = this.head;
         this.head = head.getNext();
-        return tempNode;
     }
 
-    public INode popLast() {
+    public void popLast() {
         INode tempNode = this.head;
         while (!tempNode.getNext().equals(tail)) {
             tempNode = tempNode.getNext();
         }
         this.tail = tempNode;
-        tempNode = tempNode.getNext();
-        return tempNode;
     }
 
-    public INode<K> search(K data) {
-        INode<K> tempNode = head;
-        while (tempNode != null)
-        {
-            if (tempNode.getData().equals(data)) {
-                System.out.println(" The node is present ");
+    public INode search(K key) {
+        INode tempNode = head;
+        while (tempNode != null ) { // && tempNode.getNext() != null) {
+            if (tempNode.getKey().equals(key)) {
                 return tempNode;
+            } else {
+                tempNode = tempNode.getNext();
             }
-            else return null;
         }
         return null;
     }
@@ -82,7 +84,7 @@ public class LinkedList<K> {
     public void searchInsert(K data, INode newNode) {
         INode tempNode = head;
         while (tempNode.getNext() != null) {
-            if (tempNode.getData().equals(data)) {
+            if (tempNode.getKey().equals(data)) {
                 INode temp = tempNode.getNext();
                 tempNode.setNext(newNode);
                 newNode.setNext(temp);
@@ -95,9 +97,9 @@ public class LinkedList<K> {
     public void searchDelete(K key) {
         INode tempNode = head;
         while (tempNode.getNext() != null) {
-            if (tempNode.getNext().getData().equals(key)) {
-                INode temp = tempNode.getNext().getNext();
-                tempNode.setNext(temp);
+            if (tempNode.getNext().getKey().equals(key)) {
+                INode temp = tempNode.getNext();
+                tempNode.setNext(temp.getNext().getNext());
             }
             tempNode = tempNode.getNext();
         }

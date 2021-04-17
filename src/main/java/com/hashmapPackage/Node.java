@@ -1,23 +1,22 @@
 package com.hashmapPackage;
 
 public class Node<K> implements INode<K> {
-    private K data;
-    private INode next;
+    public K Key;
+    public INode next;
 
-    //constructor
     public Node(K data) {
-        this.data = data;
+        this.Key = data;
         this.next = null;
     }
 
     @Override
-    public K getData() {
-        return data;
+    public K getKey() {
+        return Key;
     }
 
     @Override
-    public void setData(K key) {
-        this.data = key;
+    public void setKey(K key) {
+        this.Key = key;
     }
 
 

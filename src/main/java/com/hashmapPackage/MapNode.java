@@ -1,9 +1,5 @@
 package com.hashmapPackage;
-
-import java.security.Key;
-
 public class MapNode<K, V> implements INode<K> {
-
     K key;
     V value;
     MapNode<K,V> next;
@@ -15,13 +11,13 @@ public class MapNode<K, V> implements INode<K> {
     }
 
     @Override
-    public K getData() {
+    public K getKey() {
         return key;
     }
 
     @Override
-    public void setData(K key) {
-    this.key = key;
+    public void setKey(K key) {
+         this.key = key;
     }
 
     @Override
@@ -31,10 +27,11 @@ public class MapNode<K, V> implements INode<K> {
 
     @Override
     public void setNext(INode next) {
-        this.next = (MapNode<K, V>)next;
+        this.next = (MapNode<K, V>) next;
     }
+
     public V getValue(){
-        return this.value;
+        return value ;
     }
 
     public void setValue(V value){
@@ -43,10 +40,11 @@ public class MapNode<K, V> implements INode<K> {
 
     public String toString(){
         StringBuilder mapNodeString = new StringBuilder();
-        mapNodeString.append("MapNode{" + "K=").append(key)
-                .append(" V= ").append(value).append("}");
-        if(next != null)
-            mapNodeString.append("->").append(next);
+        mapNodeString.append("MapNode {" + "K=").append(key)
+                .append("V= ").append(value).append("}");
+        if(next != null) {
+            mapNodeString.append(" -> ").append(next);
+        }
         return mapNodeString.toString();
     }
 }
